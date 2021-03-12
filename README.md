@@ -2,6 +2,11 @@
 
 Está é uma RESTful API para geração e manutenção de pagamentos via Boleto.
 
+### Tecnologias utilizadas:
+- [x] PHP 7.2.19
+- [x] Laravel 7.29
+- [x] MySql 5.7 
+
 ## Instalação
 
 `1°:` Clone o repositório em seu ambiente.
