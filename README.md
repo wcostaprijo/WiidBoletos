@@ -117,7 +117,7 @@ Resposta (Em caso de erro, CÓDIGO: 401):
 ## Metódos da API
 ### [POST] /api/register
 Headers:
-[x] Accept: application/json
+ - [x] Accept: application/json
 
 Parâmetro | Tipo | Obrigatório
 ---|---|---
@@ -128,7 +128,7 @@ password | string | sim
 
 ### [POST] /api/login
 Headers:
-[x] Accept: application/json
+- [x] Accept: application/json
 
 Parâmetro | Tipo | Obrigatório
 ---|---|---
@@ -137,18 +137,18 @@ password | string | sim
 
 ### [POST] /api/me
 Headers:
-[x] Accept: application/json
-[x] Authorization: Bearer {JWTToken}
+- [x] Accept: application/json
+- [x] Authorization: Bearer {JWTToken}
 
 ### [GET] /api/pagador/me
 Headers:
-[x] Accept: application/json
-[x] Authorization: Bearer {JWTToken}
+- [x] Accept: application/json
+- [x] Authorization: Bearer {JWTToken}
 
 ### [POST] /api/pagador/create
 Headers:
-[x] Accept: application/json
-[x] Authorization: Bearer {JWTToken}
+- [x] Accept: application/json
+- [x] Authorization: Bearer {JWTToken}
 
 Parâmetro | Tipo | Obrigatório | formato
 ---|---|---|---
@@ -167,8 +167,8 @@ address_state | string | sim
 
 ### [POST] /api/pagador/update/{id_pagador}
 Headers:
-[x] Accept: application/json
-[x] Authorization: Bearer {JWTToken}
+- [x] Accept: application/json
+- [x] Authorization: Bearer {JWTToken}
 
 Parâmetro | Tipo | Obrigatório | formato
 ---|---|---|---
@@ -187,8 +187,8 @@ address_state | string | não
 
 ### [POST] /api/pagador/delete/{id_pagador}
 Headers:
-[x] Accept: application/json
-[x] Authorization: Bearer {JWTToken}
+- [x] Accept: application/json
+- [x] Authorization: Bearer {JWTToken}
 
 
 
