@@ -2,12 +2,6 @@
 
 Está é uma RESTful API para geração e manutenção de pagamentos via Boleto.
 
-`IMPORTANTE:` para uso comercial utilize o comando:
-```
-php artisan jwt:secret
-```
-O comando acima criará uma nova chave secreta para o JWT.
-
 ## Instalação
 
 `1°:` Clone o repositório em seu ambiente.
@@ -20,6 +14,10 @@ composer install
 `4°:` utilize o comando:
 ```
 php artisan migrate 
+```
+`5°:` utilize o comando:
+```
+php artisan jwt:secret
 ```
 
 ## Como utilizar
