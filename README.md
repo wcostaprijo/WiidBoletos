@@ -11,6 +11,7 @@ O comando acima criará uma nova chave secreta para o JWT.
 ## Instalação
 
 `1°:` Clone o repositório em seu ambiente.
+
 `2°:` utilize o comando:
 ```
 composer install
