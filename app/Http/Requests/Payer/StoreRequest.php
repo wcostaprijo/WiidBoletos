@@ -32,8 +32,8 @@ class StoreRequest extends FormRequest
             'address_cep' => ['required','string', new \App\Rules\CEP],
             'address_street' => 'required|string',
             'address_district' => 'required|string',
-            'address_number' => 'required|numeric',
-            'address_complement' => 'required|string',
+            'address_number' => 'nullable|numeric',
+            'address_complement' => 'nullable|string',
             'address_city' => 'required|string',
             'address_state' => 'required|string',
         ];

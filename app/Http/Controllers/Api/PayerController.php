@@ -11,7 +11,7 @@ class PayerController extends Controller
     /**
      * Display a listing of the payers.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\ResponseJson
      */
     public function index()
     {

@@ -67,4 +67,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(\App\Models\Payer::class);
     }
+
+    /**
+     * Return the relation with table titles
+     * 
+     * @return \App\Models\Payer
+     */
+    public function titles()
+    {
+        return $this->hasMany(\App\Models\Title::class);
+    }
 }

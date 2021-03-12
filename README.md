@@ -30,10 +30,13 @@ Cadastro de usuário:
 curl --request POST \
   --url https://dominio.com/api/register \
   --header 'Accept: application/json' \
-  --data name=Nome \
-  --data last_name=Sobrenome \
-  --data email=wcostaprijo@hotmail.com \
-  --data password=123456789
+  --header 'Content-Type: application/json' \
+  --data '{
+	"name": "Wanderson",
+	"last_name": "Wanderson",
+	"email": "wanderson@hotmail.com",
+	"password": "123456789"
+}'
 ```
 Resposta (Em caso de sucesso, CÓDIGO: 201):
 ```
@@ -43,7 +46,7 @@ Resposta (Em caso de sucesso, CÓDIGO: 201):
   "email": "wanderson2@hotmail.com",
   "updated_at": "2021-03-12T01:37:16.000000Z",
   "created_at": "2021-03-12T01:37:16.000000Z",
-  "id": 6
+  "id": 1
 }
 ```
 Resposta (Em caso de erro, CÓDIGO: 400):
@@ -72,15 +75,18 @@ Autenticação de usuário:
 curl --request POST \
   --url https://dominio.com/api/login \
   --header 'Accept: application/json' \
-  --data email=wcostaprijo@hotmail.com \
-  --data password=123456789
+  --header 'Content-Type: application/json' \
+  --data '{
+	"email": "wanderson@hotmail.com",
+	"password": "123456789"
+}'
 ```
 Resposta (Em caso de sucesso, CÓDIGO: 200):
 ```
 {
   "access_token": "{JWTToken}",
   "token_type": "bearer",
-  "expires_in": 120
+  "expires_in": 600
 }
 ```
 Resposta (Em caso de erro, CÓDIGO: 401):
@@ -93,7 +99,8 @@ Resposta (Em caso de erro, CÓDIGO: 401):
 Recuperando usuário logado:
 ```
 curl --request POST \
-  --url http://wiid.test/api/me \
+  --url https://dominio.com/api/me \
+  --header 'Accept: application/json' \
   --header 'Authorization: Bearer {JWTToken}'
 ```
 Resposta (Em caso de sucesso, CÓDIGO: 200):
@@ -118,6 +125,7 @@ Resposta (Em caso de erro, CÓDIGO: 401):
 ### [POST] /api/register
 Headers:
  - [x] Accept: application/json
+ - [x] Content-Type: application/json
 
 Parâmetro | Tipo | Obrigatório
 ---|---|---
@@ -129,6 +137,7 @@ password | string | sim
 ### [POST] /api/login
 Headers:
 - [x] Accept: application/json
+- [x] Content-Type: application/json
 
 Parâmetro | Tipo | Obrigatório
 ---|---|---
@@ -148,6 +157,7 @@ Headers:
 ### [POST] /api/pagador/create
 Headers:
 - [x] Accept: application/json
+- [x] Content-Type: application/json
 - [x] Authorization: Bearer {JWTToken}
 
 Parâmetro | Tipo | Obrigatório | formato
@@ -160,14 +170,15 @@ birth | string | sim | **YYYY-MM-DD**
 address_cep | string | sim | **00 000-000**
 address_street | string | sim
 address_district | string | sim
-address_number | string | sim
-address_complement | string | sim
+address_number | string | não
+address_complement | string | não
 address_city | string | sim
 address_state | string | sim
 
 ### [POST] /api/pagador/update/{id_pagador}
 Headers:
 - [x] Accept: application/json
+- [x] Content-Type: application/json
 - [x] Authorization: Bearer {JWTToken}
 
 Parâmetro | Tipo | Obrigatório | formato
@@ -190,28 +201,71 @@ Headers:
 - [x] Accept: application/json
 - [x] Authorization: Bearer {JWTToken}
 
+### [GET] /api/boleto/me
+Headers:
+- [x] Accept: application/json
+- [x] Authorization: Bearer {JWTToken}
 
+### [GET] /api/boleto/pagador/{id_pagador}
+Headers:
+- [x] Accept: application/json
+- [x] Authorization: Bearer {JWTToken}
 
+### [POST] /api/boleto/create
+Headers:
+- [x] Accept: application/json
+- [x] Content-Type: application/json
+- [x] Authorization: Bearer {JWTToken}
 
+Parâmetro | Tipo | Obrigatório | formato
+---|---|---|---
+payer_id | bigint | sim
+due_date | date | sim | **YYYY-MM-DD**
+value | int | sim | **Centavos** - R$ 1,58 = 158
+description | string | sim
+fine_type | int | não | [**1**] Valor fixo - [**2**] Porcentagem
+fine_value | int | somente se **fine_type** for informado | **Centavos** - R$ 1,58 = 158
+fee_type | int | não | [**1**] Valor fixo - [**2**] Porcentagem
+fee_value | int | somente se **fee_type** for informado | **Centavos** - R$ 1,58 = 158
+discount_type | int | não | [**1**] Valor fixo - [**2**] Porcentagem
+discount_value | int | somente se **discount_type** for informado | **Centavos** - R$ 1,58 = 158
+discount_date_limit | date | somente se **discount_type** for informado | **YYYY-MM-DD**
+reference | string | não
+instruction_one | string | não
+instruction_two | string | não
+instruction_three | string | não
 
+### [POST] /api/boleto/update/{id_boleto}
+Headers:
+- [x] Accept: application/json
+- [x] Content-Type: application/json
+- [x] Authorization: Bearer {JWTToken}
 
+Parâmetro | Tipo | Obrigatório | formato
+---|---|---|---
+payer_id | bigint | não
+due_date | date | não | **YYYY-MM-DD**
+value | int | não | **Centavos** - R$ 1,58 = 158
+description | string | não
+fine_type | int | não | [**1**] Valor fixo - [**2**] Porcentagem
+fine_value | int | somente se **fine_type** for informado | **Centavos** - R$ 1,58 = 158
+fee_type | int | não | [**1**] Valor fixo - [**2**] Porcentagem
+fee_value | int | somente se **fee_type** for informado | **Centavos** - R$ 1,58 = 158
+discount_type | int | não | [**1**] Valor fixo - [**2**] Porcentagem
+discount_value | int | somente se **discount_type** for informado | **Centavos** - R$ 1,58 = 158
+discount_date_limit | date | somente se **discount_type** for informado | **YYYY-MM-DD**
+reference | string | não
+instruction_one | string | não
+instruction_two | string | não
+instruction_three | string | não
 
+### [POST] /api/boleto/delete/{id_boleto}
+Headers:
+- [x] Accept: application/json
+- [x] Authorization: Bearer {JWTToken}
 
+#### Observação: Tenho ciência dos padrões de verbalização das rotas para RestFul API, porém para atender as necessidades do teste, não utilizei os devidos padrões.
 
+![Créditos a @wssilva.willian, site medium](https://miro.medium.com/max/700/1*FtjrUUGyi92aJGz1kMUfwA.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![Créditos a @wssilva.willian, site medium](https://miro.medium.com/max/442/1*ES8Om94ZdBv9dQ1kE0ZqGA.png)

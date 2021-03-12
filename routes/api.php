@@ -14,4 +14,12 @@ Route::group(['middleware' => ['apiJWT'], 'namespace' => 'Api'], function() {
         Route::post('update/{id}', 'PayerController@update');
         Route::post('delete/{id}', 'PayerController@destroy');
     });
+
+    Route::group(['prefix' => 'boleto'], function(){
+        Route::get('me', 'TitleController@index');
+        Route::get('pagador/{id}', 'TitleController@listByPayer');
+        Route::post('create', 'TitleController@store');
+        Route::post('update/{id}', 'TitleController@update');
+        Route::post('delete/{id}', 'TitleController@destroy');
+    });
 });

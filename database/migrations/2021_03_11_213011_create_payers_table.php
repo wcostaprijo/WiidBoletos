@@ -25,8 +25,8 @@ class CreatePayersTable extends Migration
             $table->string('address_cep');  // CEP
             $table->string('address_street'); // Rua
             $table->string('address_district'); // Bairro
-            $table->string('address_number'); // Número da casa
-            $table->string('address_complement'); // Complemento
+            $table->string('address_number')->nullable(); // Número da casa
+            $table->string('address_complement')->nullable(); // Complemento
             $table->string('address_city'); // Cidade
             $table->string('address_state'); // Estado
             $table->timestamps();
